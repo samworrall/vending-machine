@@ -11,4 +11,8 @@ class ProductHandler
   def product_in_supply?(product)
     product_supply[product.to_sym][:quantity].positive?
   end
+
+  def price_of(product)
+    product_supply[product.to_sym][:price]
+  end
 end

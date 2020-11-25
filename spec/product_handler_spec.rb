@@ -28,4 +28,10 @@ RSpec.describe ProductHandler do
       end
     end
   end
+
+  describe '#price_of' do
+    it 'returns the price of a product' do
+      expect(subject.price_of('sprite')).to eq(1)
+    end
+  end
 end
