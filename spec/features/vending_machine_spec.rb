@@ -5,10 +5,11 @@ require 'product_handler'
 require 'payment_handler'
 
 RSpec.describe VendingMachine do
-  let(:subject) { described_class.new(product_handler, payment_handler) }
+  let(:subject) { described_class.new(product_handler, payment_handler, change_supply) }
   let(:product_handler) { ProductHandler.new(product_supply) }
   let(:product_supply) { { "sprite": { "price": 1, "quantity": quantity } } }
   let(:payment_handler) { PaymentHandler.new }
+  let(:change_supply) { { '1p': 50, '5p': 5 } }
   let(:quantity) { 1 }
   let(:payment) { { '1p': 1, '2p': 2 } }
 
@@ -31,8 +32,13 @@ RSpec.describe VendingMachine do
       end
     end
 
-    xcontext 'the machine does not have the correct change in supply' do
-      xit 'asks the user to supply exact change' do
+    context 'the machine does not have the correct change in supply' do
+      let(:payment) { { '£2': 1 } }
+
+      it 'asks the user to supply exact change' do
+        expect(subject.request_product('sprite', payment)).to eq(
+          'Machine has insufficient change, please provide exact payment.'
+        )
       end
     end
 
