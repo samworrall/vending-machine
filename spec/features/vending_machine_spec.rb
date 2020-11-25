@@ -7,20 +7,25 @@ RSpec.describe VendingMachine do
   let(:subject) { described_class.new(product_handler) }
   let(:product_handler) { ProductHandler.new(product_supply) }
   let(:product_supply) { { "sprite": { "price": 1, "quantity": quantity } } }
+  let(:quantity) { 1 }
+  let(:payment) { { '1p': 1, '2p': 2 } }
 
   describe '#request_product' do
     context 'the product is out of stock' do
       let(:quantity) { 0 }
 
       it 'asks the user to choose a different product' do
-        expect(subject.request_product('sprite')).to eq(
+        expect(subject.request_product('sprite', payment)).to eq(
           'Product out of stock, please choose a different product.'
         )
       end
     end
 
-    xcontext 'supplying insufficient money to buy a product' do
-      xit 'asks the user to supply sufficient money' do
+    context 'supplying insufficient payment to buy a product' do
+      it 'asks the user to supply sufficient payment' do
+        expect(subject.request_product('sprite', payment)).to eq(
+          'Insufficient payment provided.'
+        )
       end
     end
 
