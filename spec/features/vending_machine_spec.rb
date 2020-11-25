@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 require 'vending_machine'
+require 'product_handler'
 
 RSpec.describe VendingMachine do
-  let(:subject) { described_class.new(product_supply) }
+  let(:subject) { described_class.new(product_handler) }
+  let(:product_handler) { ProductHandler.new(product_supply) }
   let(:product_supply) { { "sprite": { "price": 1, "quantity": quantity } } }
 
   describe '#request_product' do
@@ -12,7 +14,7 @@ RSpec.describe VendingMachine do
 
       it 'asks the user to choose a different product' do
         expect(subject.request_product('sprite')).to eq(
-          'This product is out of stock, please choose a different product.'
+          'Product out of stock, please choose a different product.'
         )
       end
     end

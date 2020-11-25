@@ -2,14 +2,13 @@
 
 # VendingMachine class responsible for processing product requests and loading requests.
 class VendingMachine
-  def initialize(product_supply)
-    @product_supply = product_supply
+  def initialize(product_handler)
+    @product_handler = product_handler
   end
 
-  attr_reader :product_supply
+  attr_reader :product_handler
 
   def request_product(product)
-    product_quantity = product_supply[product.to_sym][:quantity]
-    return 'This product is out of stock, please choose a different product.' unless product_quantity.positive?
+    return 'Product out of stock, please choose a different product.' unless product_handler.product_in_supply?(product)
   end
 end
