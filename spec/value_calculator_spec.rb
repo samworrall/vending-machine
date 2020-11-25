@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'payment_handler'
+require 'value_calculator'
 
-RSpec.describe PaymentHandler do
+RSpec.describe ValueCalculator do
   let(:subject) { described_class.new }
 
   describe '#value_of' do

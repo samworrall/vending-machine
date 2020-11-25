@@ -2,13 +2,13 @@
 
 require 'vending_machine'
 require 'product_handler'
-require 'payment_handler'
+require 'value_calculator'
 
 RSpec.describe VendingMachine do
-  let(:subject) { described_class.new(product_handler, payment_handler, change_supply) }
+  let(:subject) { described_class.new(product_handler, value_calculator, change_supply) }
   let(:product_handler) { ProductHandler.new(product_supply) }
   let(:product_supply) { { "sprite": { "price": 1, "quantity": quantity } } }
-  let(:payment_handler) { PaymentHandler.new }
+  let(:value_calculator) { ValueCalculator.new }
   let(:change_supply) { { '1p': 50, '5p': 5 } }
   let(:quantity) { 1 }
   let(:payment) { { '1p': 1, '2p': 2 } }
