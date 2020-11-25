@@ -3,11 +3,17 @@
 require 'vending_machine'
 
 RSpec.describe VendingMachine do
-  let(:subject) { described_class }
+  let(:subject) { described_class.new(product_supply) }
+  let(:product_supply) { { "sprite": { "price": 1, "quantity": quantity } } }
 
   describe '#request_product' do
-    xcontext 'the product is out of stock' do
-      xit 'asks the user to choose a different product' do
+    context 'the product is out of stock' do
+      let(:quantity) { 0 }
+
+      it 'asks the user to choose a different product' do
+        expect(subject.request_product('sprite')).to eq(
+          'This product is out of stock, please choose a different product.'
+        )
       end
     end
 
