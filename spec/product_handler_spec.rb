@@ -4,7 +4,7 @@ require 'product_handler'
 
 RSpec.describe ProductHandler do
   let(:subject) { described_class.new(product_supply) }
-  let(:product_supply) { { "sprite": { "price": 1, "quantity": quantity } } }
+  let(:product_supply) { { "sprite": { "price": 100, "quantity": quantity } } }
   let(:quantity) { 1 }
 
   describe '#product_supply' do
@@ -31,7 +31,7 @@ RSpec.describe ProductHandler do
 
   describe '#price_of' do
     it 'returns the price of a product' do
-      expect(subject.price_of('sprite')).to eq(1)
+      expect(subject.price_of('sprite')).to eq(100)
     end
   end
 end
