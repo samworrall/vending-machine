@@ -1,5 +1,11 @@
 Metrics/BlockLength:
   Max: 50
+  Exclude:
+    - 'spec/features/vending_machine_spec.rb'
 
 Metrics/MethodLength:
   Max: 20
+
+Metrics/AbcSize:
+  Exclude:
+     - 'lib/vending_machine.rb'

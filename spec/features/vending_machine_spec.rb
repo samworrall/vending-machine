@@ -42,8 +42,18 @@ RSpec.describe VendingMachine do
       end
     end
 
-    xcontext 'the product is in supply, the money supplied is sufficient, and the machine is able to supply change' do
-      xit 'returns the requested product and updates internal supplies' do
+    context 'the product is in supply, the money supplied is sufficient, and the machine can supply change' do
+      let(:payment) { { '50p': 1, '£2': 1 } }
+      let(:change_supply) { { '£1': 2 } }
+
+      it 'returns the requested product / change and updates internal supplies' do
+        expect(subject.request_product('sprite', payment)).to eq(
+          {
+            'product': 'sprite', 'change': { '£1': 1, '50p': 1 }
+          }
+        )
+        expect(subject.product_handler.product_supply[:sprite][:quantity]).to eq(0)
+        expect(subject.change_handler.change_supply[:'£1']).to eq(1)
       end
     end
   end

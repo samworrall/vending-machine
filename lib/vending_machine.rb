@@ -19,10 +19,16 @@ class VendingMachine
     return 'Product out of stock, please choose a different product.' unless product_handler.product_in_supply?(product)
     return 'Insufficient payment provided.' unless payment_sufficient?(product_price, payment_value)
 
+    change_handler.add_change(payment)
     change_owed = payment_value - product_price
     change = change_owed.zero? ? 0 : ChangeCalculator.call(change_owed, change_handler.change_supply)
 
     return 'Machine has insufficient change, please provide exact payment.' unless change
+
+    product_handler.dispense_product(product)
+    change_handler.dispense_change(change)
+
+    { 'product': product, 'change': change }
   end
 
   private

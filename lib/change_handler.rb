@@ -15,4 +15,20 @@ class ChangeHandler
 
     (change_supply_value - change_from_payment).negative? ? nil : change_from_payment
   end
+
+  def add_change(coins)
+    coins.each do |coin, quantity|
+      if change_supply[coin]
+        change_supply[coin] += quantity
+      else
+        change_supply[coin] = quantity
+      end
+    end
+  end
+
+  def dispense_change(coins)
+    coins.each do |coin, quantity|
+      change_supply[coin] -= quantity
+    end
+  end
 end

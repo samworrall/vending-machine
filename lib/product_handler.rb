@@ -15,4 +15,8 @@ class ProductHandler
   def price_of(product)
     product_supply[product.to_sym][:price]
   end
+
+  def dispense_product(product)
+    product_supply[product.to_sym][:quantity] -= 1
+  end
 end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'change_handler'
+require 'value_calculator'
 
 RSpec.describe ChangeHandler do
   let(:subject) { described_class.new(change_supply) }
@@ -31,6 +32,21 @@ RSpec.describe ChangeHandler do
       it 'returns nil' do
         expect(subject.calculate_change_from_payment(product_price, payment_value)).to eq(nil)
       end
+    end
+  end
+
+  describe '#add_change' do
+    it 'increases the quantity of coins in supply' do
+      subject.add_change({ '1p': 5, '10p': 2 })
+      expect(subject.change_supply[:'1p']).to eq(55)
+      expect(subject.change_supply[:'10p']).to eq(2)
+    end
+  end
+
+  describe '#dispense_change' do
+    it 'decreases the quantity of coins in supply' do
+      subject.dispense_change({ '5p': 2 })
+      expect(subject.change_supply[:'5p']).to eq(3)
     end
   end
 end

@@ -34,4 +34,10 @@ RSpec.describe ProductHandler do
       expect(subject.price_of('sprite')).to eq(100)
     end
   end
+
+  describe '#dispense_product' do
+    it 'reduces the quantity of the product by 1' do
+      expect { subject.dispense_product('sprite') }.to change { subject.product_supply[:sprite][:quantity] }.by(-1)
+    end
+  end
 end
