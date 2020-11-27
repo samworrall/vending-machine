@@ -72,7 +72,10 @@ RSpec.describe VendingMachine do
   end
 
   describe '#load_change' do
-    xit 'confirms the loading of change' do
+    it 'updates internal change supplies' do
+      subject.load_change({ '1p': 10, '£1': 10 })
+      expect(subject.change_handler.change_supply[:'1p']).to eq(60)
+      expect(subject.change_handler.change_supply[:'£1']).to eq(10)
     end
   end
 end

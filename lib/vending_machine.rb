@@ -35,6 +35,10 @@ class VendingMachine
     product_handler.load_product(products)
   end
 
+  def load_change(change)
+    change_handler.add_change(change)
+  end
+
   private
 
   def payment_sufficient?(product_price, payment_value)
