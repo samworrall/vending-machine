@@ -3,9 +3,9 @@
 require 'value_calculator'
 
 RSpec.describe ValueCalculator do
-  let(:subject) { described_class.new }
+  let(:subject) { described_class }
 
-  describe '#value_of' do
+  describe '#self.value_of' do
     let(:payment) { { '1p': 1, '2p': 2, '50p': 5, '£1': 2 } }
 
     it 'returns the total value of the payment' do

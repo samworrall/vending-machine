@@ -3,12 +3,11 @@
 require 'change_handler'
 
 RSpec.describe ChangeHandler do
-  let(:subject) { described_class.new(change_supply, value_calculator) }
+  let(:subject) { described_class.new(change_supply) }
   let(:change_supply) { { '1p': 50, '5p': 5 } }
-  let(:value_calculator) { double :value_calculator }
 
   before do
-    allow(value_calculator).to receive(:value_of).with(change_supply).and_return(0.75)
+    allow(ValueCalculator).to receive(:value_of).with(change_supply).and_return(0.75)
   end
 
   describe '#change_supply' do
