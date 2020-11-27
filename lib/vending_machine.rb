@@ -20,7 +20,7 @@ class VendingMachine
     return 'Insufficient payment provided.' unless payment_sufficient?(product_price, payment_value)
 
     change_owed = payment_value - product_price
-    change = change_owed.zero? ? 0 : ChangeCalculator.new.call(change_owed, change_handler.change_supply)
+    change = change_owed.zero? ? 0 : ChangeCalculator.call(change_owed, change_handler.change_supply)
 
     return 'Machine has insufficient change, please provide exact payment.' unless change
   end

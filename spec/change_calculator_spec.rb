@@ -3,7 +3,7 @@
 require 'change_calculator'
 
 RSpec.describe ChangeCalculator do
-  let(:subject) { described_class.new }
+  let(:subject) { described_class }
 
   describe '#call' do
     context 'when the change supply is able to supply exact change with one coin' do

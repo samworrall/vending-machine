@@ -4,7 +4,7 @@ require_relative './services/lookup_table'
 
 # ChangeCalculator responsible for calculating the correct coins to return as change
 class ChangeCalculator
-  def call(change_owed, change_supply)
+  def self.call(change_owed, change_supply)
     change_owed_in_coins = {}
 
     change_supply_coin_values(change_supply).each do |coin_value|
@@ -28,13 +28,13 @@ class ChangeCalculator
     change_owed_in_coins
   end
 
-  private
-
-  def change_supply_coin_values(change_supply)
+  def self.change_supply_coin_values(change_supply)
     change_supply.map { |coin, _| coin_to_value[coin] }.sort.reverse
   end
 
-  def coin_to_value
+  def self.coin_to_value
     LookupTable::COIN_TO_VALUE
   end
+
+  private_class_method :change_supply_coin_values, :coin_to_value
 end
