@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'change_calculator'
+
 # VendingMachine class responsible for processing product requests and loading requests.
 class VendingMachine
   def initialize(product_handler, value_calculator, change_handler)
@@ -17,7 +19,8 @@ class VendingMachine
     return 'Product out of stock, please choose a different product.' unless product_handler.product_in_supply?(product)
     return 'Insufficient payment provided.' unless payment_sufficient?(product_price, payment_value)
 
-    change = change_handler.calculate_change_from_payment(product_price, payment_value)
+    change_owed = payment_value - product_price
+    change = change_owed.zero? ? 0 : ChangeCalculator.new.call(change_owed, change_handler.change_supply)
 
     return 'Machine has insufficient change, please provide exact payment.' unless change
   end
