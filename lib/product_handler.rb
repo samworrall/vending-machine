@@ -19,4 +19,14 @@ class ProductHandler
   def dispense_product(product)
     product_supply[product.to_sym][:quantity] -= 1
   end
+
+  def load_product(products)
+    products.each do |product, attributes|
+      if product_supply[product]
+        product_supply[product][:quantity] += attributes[:quantity]
+      else
+        product_supply[product] = attributes
+      end
+    end
+  end
 end

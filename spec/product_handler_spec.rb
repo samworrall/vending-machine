@@ -40,4 +40,21 @@ RSpec.describe ProductHandler do
       expect { subject.dispense_product('sprite') }.to change { subject.product_supply[:sprite][:quantity] }.by(-1)
     end
   end
+
+  describe '#load_product' do
+    context 'loading product that already exists in the supply' do
+      it 'increases the quantity of specified product by a specified quantity' do
+        expect { subject.load_product({ "sprite": { "price": 100, "quantity": 5 } }) }
+          .to change { subject.product_supply[:sprite][:quantity] }.by(5)
+      end
+    end
+
+    context 'loading a new product' do
+      it 'adds the product to the product supply' do
+        subject.load_product({ "oreos": { "price": 60, "quantity": 5 } })
+        expect(subject.product_supply[:oreos][:price]).to eq(60)
+        expect(subject.product_supply[:oreos][:quantity]).to eq(5)
+      end
+    end
+  end
 end

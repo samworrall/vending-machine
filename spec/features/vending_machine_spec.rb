@@ -59,7 +59,15 @@ RSpec.describe VendingMachine do
   end
 
   describe '#load_product' do
-    xit 'confirms the loading of product' do
+    it 'updates internal product supplies' do
+      subject.load_product(
+        {
+          "sprite": { "price": 100, "quantity": 5 },
+          "oreos": { "price": 60, "quantity": 5 }
+        }
+      )
+      expect(subject.product_handler.product_supply[:sprite][:quantity]).to eq(6)
+      expect(subject.product_handler.product_supply[:oreos][:quantity]).to eq(5)
     end
   end
 
