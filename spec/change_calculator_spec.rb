@@ -50,5 +50,14 @@ RSpec.describe ChangeCalculator do
         expect(subject.call(change_to_return, change_supply)).to eq({ '20p': 1, '10p': 3 })
       end
     end
+
+    context 'when the change supply contains a coin that has a quantity of 0' do
+      let(:change_to_return) { 50 }
+      let(:change_supply) { { '10p': 3, '20p': 1, '50p': 0 } }
+
+      it 'does not include 50p: 0 in the return object' do
+        expect(subject.call(change_to_return, change_supply)).to eq({ '20p': 1, '10p': 3 })
+      end
+    end
   end
 end
