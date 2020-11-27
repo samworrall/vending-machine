@@ -10,6 +10,7 @@ class ChangeCalculator
     change_supply_coin_values(change_supply).each do |coin_value|
       coin = coin_to_value.key(coin_value)
       max_num_of_coin_to_return = change_owed / coin_value
+      next if max_num_of_coin_to_return.zero?
       available_num_of_coin_to_return = change_supply[coin]
 
       num_of_coin_to_return = if available_num_of_coin_to_return < max_num_of_coin_to_return

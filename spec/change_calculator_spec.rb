@@ -41,5 +41,14 @@ RSpec.describe ChangeCalculator do
         expect(subject.call(change_to_return, change_supply)).to eq(nil)
       end
     end
+
+    context 'when the change supply contains a coin that is too large in value to be given at all' do
+      let(:change_to_return) { 50 }
+      let(:change_supply) { { '10p': 3, '20p': 1, '£1': 5 } }
+
+      it 'does not include £1: 0 in the return object' do
+        expect(subject.call(change_to_return, change_supply)).to eq({ '20p': 1, '10p': 3 })
+      end
+    end
   end
 end
