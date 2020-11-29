@@ -17,24 +17,6 @@ RSpec.describe ChangeHandler do
     end
   end
 
-  describe '#calculate_change_from_payment' do
-    let(:product_price) { 0.01 }
-    let(:payment_value) { 0.02 }
-
-    it 'returns the calculated change' do
-      expect(subject.calculate_change_from_payment(product_price, payment_value)).to eq(0.01)
-    end
-
-    context 'when the change owed exceeds the change supply' do
-      let(:product_price) { 1 }
-      let(:payment_value) { 2 }
-
-      it 'returns nil' do
-        expect(subject.calculate_change_from_payment(product_price, payment_value)).to eq(nil)
-      end
-    end
-  end
-
   describe '#add_change' do
     it 'increases the quantity of coins in supply' do
       subject.add_change({ '1p': 5, '10p': 2 })
