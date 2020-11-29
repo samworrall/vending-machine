@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './services/lookup_table'
+require_relative '../coin_values'
 
 # ChangeCalculator responsible for calculating the correct coins to return as change
 class ChangeCalculator
@@ -34,7 +34,7 @@ class ChangeCalculator
   end
 
   def self.coin_to_value
-    LookupTable::COIN_TO_VALUE
+    CoinValues::COIN_VALUES_IN_PENCE
   end
 
   private_class_method :change_supply_coin_values, :coin_to_value

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative './value_calculator'
-require_relative './change_calculator'
+require_relative './services/total_coin_value_calculator'
+require_relative './services/change_calculator'
 require_relative './product_handler'
 require_relative './change_handler'
 
@@ -18,7 +18,7 @@ class VendingMachine
     return 'Product out of stock, please choose a different product.' unless product_handler.product_in_supply?(product)
 
     product_price = product_handler.price_of(product)
-    payment_value = ValueCalculator.value_of(payment)
+    payment_value = TotalCoinValueCalculator.value_of(payment)
 
     return 'Insufficient payment provided.' unless payment_sufficient?(product_price, payment_value)
 
