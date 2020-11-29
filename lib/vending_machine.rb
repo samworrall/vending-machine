@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'value_calculator'
-require 'change_calculator'
+require_relative './value_calculator'
+require_relative './change_calculator'
 
 # VendingMachine class responsible for processing product requests and loading requests.
 class VendingMachine
@@ -25,14 +25,14 @@ class VendingMachine
 
     return 'Machine has insufficient change, please provide exact payment.' unless change
 
-    product_handler.dispense_product(product)
-    change_handler.dispense_change(change)
+    dispense_product(product)
+    dispense_change(change)
 
     { 'product': product, 'change': change }
   end
 
   def load_product(products)
-    product_handler.load_product(products)
+    product_handler.add_product(products)
   end
 
   def load_change(change)
@@ -43,5 +43,13 @@ class VendingMachine
 
   def payment_sufficient?(product_price, payment_value)
     payment_value >= product_price
+  end
+
+  def dispense_product(product)
+    product_handler.remove_product(product)
+  end
+
+  def dispense_change(change)
+    change_handler.remove_change(change)
   end
 end

@@ -43,9 +43,9 @@ RSpec.describe ChangeHandler do
     end
   end
 
-  describe '#dispense_change' do
+  describe '#remove_change' do
     it 'decreases the quantity of coins in supply' do
-      subject.dispense_change({ '5p': 2 })
+      subject.remove_change({ '5p': 2 })
       expect(subject.change_supply[:'5p']).to eq(3)
     end
   end

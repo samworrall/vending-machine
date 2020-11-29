@@ -35,23 +35,23 @@ RSpec.describe ProductHandler do
     end
   end
 
-  describe '#dispense_product' do
+  describe '#remove_product' do
     it 'reduces the quantity of the product by 1' do
-      expect { subject.dispense_product('sprite') }.to change { subject.product_supply[:sprite][:quantity] }.by(-1)
+      expect { subject.remove_product('sprite') }.to change { subject.product_supply[:sprite][:quantity] }.by(-1)
     end
   end
 
-  describe '#load_product' do
-    context 'loading product that already exists in the supply' do
+  describe '#add_product' do
+    context 'adding product that already exists in the supply' do
       it 'increases the quantity of specified product by a specified quantity' do
-        expect { subject.load_product({ "sprite": { "price": 100, "quantity": 5 } }) }
+        expect { subject.add_product({ "sprite": { "price": 100, "quantity": 5 } }) }
           .to change { subject.product_supply[:sprite][:quantity] }.by(5)
       end
     end
 
-    context 'loading a new product' do
+    context 'adding a new product' do
       it 'adds the product to the product supply' do
-        subject.load_product({ "oreos": { "price": 60, "quantity": 5 } })
+        subject.add_product({ "oreos": { "price": 60, "quantity": 5 } })
         expect(subject.product_supply[:oreos][:price]).to eq(60)
         expect(subject.product_supply[:oreos][:quantity]).to eq(5)
       end

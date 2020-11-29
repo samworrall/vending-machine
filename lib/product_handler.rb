@@ -16,11 +16,11 @@ class ProductHandler
     product_supply[product.to_sym][:price]
   end
 
-  def dispense_product(product)
+  def remove_product(product)
     product_supply[product.to_sym][:quantity] -= 1
   end
 
-  def load_product(products)
+  def add_product(products)
     products.each do |product, attributes|
       if product_supply[product]
         product_supply[product][:quantity] += attributes[:quantity]

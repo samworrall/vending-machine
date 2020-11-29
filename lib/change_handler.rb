@@ -26,7 +26,7 @@ class ChangeHandler
     end
   end
 
-  def dispense_change(coins)
+  def remove_change(coins)
     coins.each do |coin, quantity|
       change_supply[coin] -= quantity
     end
