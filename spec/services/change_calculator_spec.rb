@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'change_calculator'
+require 'services/change_calculator'
 
 RSpec.describe ChangeCalculator do
   let(:subject) { described_class }

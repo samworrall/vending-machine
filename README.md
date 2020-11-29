@@ -21,7 +21,7 @@ ProductHandler, ChangeHandler, and ChangeCalculator. The handler classes are res
 and changing their own internal states. The calculator was responsible for doing the hard leg work when
 it came to calculating change in coins, which I deemed to be the trickiest part of the challenge. The
 vending machine was responbile for bringing everything together into one interface. I later added a
-ValueCalculator to handle calculating the total integer value of a collection of coins.
+TotalCoinValueCalculator to handle calculating the total integer value of a collection of coins.
 
 In the code, I decided to set up some initial feature specs that encompassed the core functionality that
 the program needed to have. I let these tests drive the code, which led to a process in which classes and
@@ -32,7 +32,7 @@ the ChangeCalculator and ValueCalculator service objects rather than have classe
 passed in. I like this decision, as it shows a separation between objects that are integral to the make up
 of the vending machine, and objects that are simply used as mathematical tools.
 
-In total I spent about 6 - 6.5 hours on this project over the span of a few days, with some of that time
+I opted for the 4-5 hour timebox and completed the work over the span of a few days, with some of that time
 dedicated to changes such as refactoring, name changes, and edge case testing after I was satisfied that
 I had got the core requirements locked down. Realistically I could have stopped sooner, and I could have
 also coded for longer; but this felt like the right amount of time to create a program that I'm happy

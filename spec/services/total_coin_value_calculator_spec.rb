@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'value_calculator'
+require 'services/total_coin_value_calculator'
 
-RSpec.describe ValueCalculator do
+RSpec.describe TotalCoinValueCalculator do
   let(:subject) { described_class }
 
   describe '#self.value_of' do

@@ -1,15 +1,10 @@
 # frozen_string_literal: true
 
 require 'change_handler'
-require 'value_calculator'
 
 RSpec.describe ChangeHandler do
   let(:subject) { described_class.new(change_supply) }
   let(:change_supply) { { '1p': 50, '5p': 5 } }
-
-  before do
-    allow(ValueCalculator).to receive(:value_of).with(change_supply).and_return(0.75)
-  end
 
   describe '#change_supply' do
     it 'returns the change supply' do
