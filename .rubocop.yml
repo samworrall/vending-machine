@@ -10,3 +10,7 @@ Metrics/MethodLength:
 Metrics/AbcSize:
   Exclude:
      - 'lib/vending_machine.rb'
+
+Style/NumericPredicate:
+  Exclude:
+    - 'lib/vending_machine.rb'

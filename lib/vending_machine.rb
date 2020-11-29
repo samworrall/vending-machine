@@ -2,6 +2,8 @@
 
 require_relative './value_calculator'
 require_relative './change_calculator'
+require_relative './product_handler'
+require_relative './change_handler'
 
 # VendingMachine class responsible for processing product requests and loading requests.
 class VendingMachine
@@ -13,10 +15,11 @@ class VendingMachine
   attr_reader :product_handler, :change_handler
 
   def purchase_product(product, payment)
+    return 'Product out of stock, please choose a different product.' unless product_handler.product_in_supply?(product)
+
     product_price = product_handler.price_of(product)
     payment_value = ValueCalculator.value_of(payment)
 
-    return 'Product out of stock, please choose a different product.' unless product_handler.product_in_supply?(product)
     return 'Insufficient payment provided.' unless payment_sufficient?(product_price, payment_value)
 
     change_handler.add_change(payment)
@@ -28,7 +31,7 @@ class VendingMachine
     end
 
     dispense_product(product)
-    dispense_change(change)
+    dispense_change(change) unless change == 0
 
     { 'product': product, 'change': change }
   end
