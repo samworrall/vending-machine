@@ -40,6 +40,11 @@ RSpec.describe VendingMachine do
           'Machine has insufficient change, please provide exact payment.'
         )
       end
+
+      it 'does not keep the payment' do
+        subject.request_product('sprite', payment)
+        expect(subject.change_handler.change_supply[:£2]).to eq(0)
+      end
     end
 
     context 'the product is in supply, the money supplied is sufficient, and the machine can supply change' do
