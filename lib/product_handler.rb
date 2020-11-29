@@ -9,6 +9,8 @@ class ProductHandler
   attr_reader :product_supply
 
   def product_in_supply?(product)
+    return false if product_supply[product.to_sym].nil?
+
     product_supply[product.to_sym][:quantity].positive?
   end
 

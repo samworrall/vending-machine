@@ -27,6 +27,12 @@ RSpec.describe ProductHandler do
         expect(subject.product_in_supply?('sprite')).to eq(false)
       end
     end
+
+    context 'the product is not in stock and has never been added before' do
+      it 'returns false' do
+        expect(subject.product_in_supply?('doritos')).to eq(false)
+      end
+    end
   end
 
   describe '#price_of' do
