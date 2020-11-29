@@ -12,7 +12,7 @@ class VendingMachine
 
   attr_reader :product_handler, :change_handler
 
-  def request_product(product, payment)
+  def purchase_product(product, payment)
     product_price = product_handler.price_of(product)
     payment_value = ValueCalculator.value_of(payment)
 

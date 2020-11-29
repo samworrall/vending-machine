@@ -13,12 +13,12 @@ RSpec.describe VendingMachine do
   let(:quantity) { 1 }
   let(:payment) { { '1p': 1, '2p': 2 } }
 
-  describe '#request_product' do
+  describe '#purchase_product' do
     context 'the product is out of stock' do
       let(:quantity) { 0 }
 
       it 'asks the user to choose a different product' do
-        expect(subject.request_product('sprite', payment)).to eq(
+        expect(subject.purchase_product('sprite', payment)).to eq(
           'Product out of stock, please choose a different product.'
         )
       end
@@ -26,7 +26,7 @@ RSpec.describe VendingMachine do
 
     context 'supplying insufficient payment to buy a product' do
       it 'asks the user to supply sufficient payment' do
-        expect(subject.request_product('sprite', payment)).to eq(
+        expect(subject.purchase_product('sprite', payment)).to eq(
           'Insufficient payment provided.'
         )
       end
@@ -36,13 +36,13 @@ RSpec.describe VendingMachine do
       let(:payment) { { '£2': 1 } }
 
       it 'asks the user to supply exact change' do
-        expect(subject.request_product('sprite', payment)).to eq(
+        expect(subject.purchase_product('sprite', payment)).to eq(
           'Machine has insufficient change, please provide exact payment.'
         )
       end
 
       it 'does not keep the payment' do
-        subject.request_product('sprite', payment)
+        subject.purchase_product('sprite', payment)
         expect(subject.change_handler.change_supply[:£2]).to eq(0)
       end
     end
@@ -51,8 +51,8 @@ RSpec.describe VendingMachine do
       let(:payment) { { '50p': 1, '£2': 1 } }
       let(:change_supply) { { '£1': 2 } }
 
-      it 'returns the requested product / change and updates internal supplies' do
-        expect(subject.request_product('sprite', payment)).to eq(
+      it 'returns the purchased product / change and updates internal supplies' do
+        expect(subject.purchase_product('sprite', payment)).to eq(
           {
             'product': 'sprite', 'change': { '£1': 1, '50p': 1 }
           }
